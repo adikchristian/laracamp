@@ -21,9 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -38,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('checkout-success', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::post('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
 });
 
 require __DIR__.'/auth.php';

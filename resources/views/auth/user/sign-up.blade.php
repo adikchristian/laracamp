@@ -16,20 +16,20 @@
         <div class="right">
             <a href="{{ route('welcome') }}"><img src="{{ asset('/images/logo.png') }}" class="logo" alt=""></a>
             <h1 class="header-third">
-                Start Today
+                Sign Up
             </h1>
             <p class="subheader">
                 Because tomorrow become never
             </p>
             <p>
             @include('components.alert')
-            <form action="{{ route('signin') }}" class="basic-form" method="POST">
+            <form action="{{ route('register.store') }}" class="basic-form" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label class="form-label">Email Address</label>
                     <input type="text" name="email"
                         class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                        value="" required />
+                        value="{{ old('email') }}" required />
                     @if ($errors->has('email'))
                         <p class="text-danger">{{ $errors->first('email') }}</p>
                     @endif
@@ -43,11 +43,29 @@
                         <p class="text-danger">{{ $errors->first('password') }}</p>
                     @endif
                 </div>
-                {{-- <div class="mb-4">
+                <div class="mb-4">
+                    <label class="form-label">Nama</label>
+                    <input type="text" name="name"
+                        class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                        value="{{ old('name') }}" required />
+                    @if ($errors->has('name'))
+                        <p class="text-danger">{{ $errors->first('name') }}</p>
+                    @endif
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Occupation</label>
+                    <input type="text" name="occupation"
+                        class="form-control {{ $errors->has('occupation') ? 'is-invalid' : '' }}"
+                        value="{{ old('occupation') }}" required />
+                    @if ($errors->has('occupation'))
+                        <p class="text-danger">{{ $errors->first('occupation') }}</p>
+                    @endif
+                </div>
+                <div class="mb-4">
                     <label class="form-label">Phone</label>
                     <input type="text" name="phone"
                         class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-                        value="" required />
+                        value="{{ old('phone') }}" required />
                     @if ($errors->has('phone'))
                         <p class="text-danger">{{ $errors->first('phone') }}</p>
                     @endif
@@ -56,18 +74,14 @@
                     <label class="form-label">Address</label>
                     <input type="text" name="address"
                         class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
-                        value="" required />
+                        value="{{ old('address') }}" required />
                     @if ($errors->has('address'))
                         <p class="text-danger">{{ $errors->first('address') }}</p>
                     @endif
-                </div> --}}
-                <button type="submit" class="w-100 btn btn-primary">Login</button>
+                </div>
+                <button type="submit" class="w-100 btn btn-primary">Daftar</button>
             </form>
-            {{-- <a class="btn btn-border btn-google-login" href="{{ route('auth-redirect') }}">
-                    <img src="{{ asset('/images/ic_google.svg') }}" class="icon" alt=""> Sign In with Google
-                </a> --}}
             </p>
-            <img src="{{ asset('/images/people.png') }}" class="people" alt="">
         </div>
     </section>
 

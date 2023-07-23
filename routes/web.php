@@ -31,6 +31,9 @@ Route::get('/dashboard', function () {
 Route::get('/auth/redirect', [UserController::class, 'google'])->name('auth-redirect');
 Route::get('/auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('auth-callback');
 
+Route::get('payment/success', [UserController::class, 'midtransCallback']);
+Route::post('payment/success', [UserController::class, 'midtransCallback']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

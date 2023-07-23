@@ -63,9 +63,9 @@
                 </div> --}}
                 <button type="submit" class="w-100 btn btn-primary">Login</button>
             </form>
-            {{-- <a class="btn btn-border btn-google-login" href="{{ route('auth-redirect') }}">
+            <a class="btn btn-border btn-google-login" href="{{ route('auth-redirect') }}">
                     <img src="{{ asset('/images/ic_google.svg') }}" class="icon" alt=""> Sign In with Google
-                </a> --}}
+                </a>
             </p>
             <img src="{{ asset('/images/people.png') }}" class="people" alt="">
         </div>

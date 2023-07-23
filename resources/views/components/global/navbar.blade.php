@@ -35,7 +35,7 @@
                     
                     <ul class="dropdown-menu" arial-labelleby="dropdownMenuLink" style="right: 0; left: 0;">
                         <li>
-                            <a href="#" class="dropdown-item">My Dasboard</a>
+                            <a href="{{ route('user.dashboard') }}" class="dropdown-item">My Dasboard</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign Out</a>

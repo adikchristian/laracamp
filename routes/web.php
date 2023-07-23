@@ -31,8 +31,8 @@ Route::get('/dashboard', function () {
 Route::get('/auth/redirect', [UserController::class, 'google'])->name('auth-redirect');
 Route::get('/auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('auth-callback');
 
-Route::get('payment/success', [UserController::class, 'midtransCallback']);
-Route::post('payment/success', [UserController::class, 'midtransCallback']);
+Route::get('payment/success', [CheckoutController::class, 'midtransCallback']);
+Route::post('payment/success', [CheckoutController::class, 'midtransCallback']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

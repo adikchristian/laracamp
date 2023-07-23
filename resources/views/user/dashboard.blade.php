@@ -34,15 +34,11 @@
                                     <strong>${{ $item->Camp->price }}k</strong>
                                 </td>
                                 <td>
-                                    @if ($item->id_paid)
-                                        <strong class="text-success">Payment Success</strong>
-                                    @else
-                                        <strong>Waiting for Payment</strong>
-                                    @endif
+                                    <strong>{{ $item->payment_status }}</strong>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-primary">
-                                        Get Contact Support
+                                        Contact Support
                                     </a>
                                 </td>
                             </tr>

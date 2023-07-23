@@ -59,14 +59,18 @@ class CheckoutController extends Controller
         $user->email = $data['email'];
         $user->name = $data['name'];
         $user->occupation = $data['occupation'];
+        $user->phone = $data['phone'];
+        $user->address = $data['address'];
         $user->save();
 
         $checkout = Checkout::create($data);
-        $this->getSnapRedirect($checkout);
+        $urlMidtrans = $this->getSnapRedirect($checkout);
 
         Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));
+
+        return \redirect($urlMidtrans);
         
-        return \redirect(\route('checkout.success'));
+        // return \redirect(\route('checkout.success'));
     }
 
     /**
@@ -109,7 +113,7 @@ class CheckoutController extends Controller
         return $checkout;
     }
 
-    public function getSanpRedirect(Checkout $checkout){
+    public function getSnapRedirect(Checkout $checkout){
         $orderId = $checkout->id.'-'.Str::random(5);
         $price = $checkout->Camp->price * 1000;
 
@@ -164,7 +168,7 @@ class CheckoutController extends Controller
     }
 
     public function midtransCallback(Request $request){
-        $notif = new Midtrans\Notification();
+        $notif = $request->method() == 'POST' ? new Midtrans\Notification() : Midtrans\Transaction::status($request->order_id);
 
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
@@ -208,6 +212,8 @@ class CheckoutController extends Controller
             $checkout->payment_status = 'failed';
         }
         $checkout->save();
+
+        // return \redirect($checkout->midtrans_url);
 
         return \view('checkout/success');
     }

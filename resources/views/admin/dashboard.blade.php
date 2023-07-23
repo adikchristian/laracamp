@@ -27,20 +27,14 @@
                                             <td>{{$checkout->Camp->title}}</td>
                                             <td>${{$checkout->Camp->price}}k</td>
                                             <td>{{$checkout->created_at->format('M d Y')}}</td>
+                                            <td>{{$checkout->payment_status}}</td>
                                             <td>
-                                                @if ($checkout->id_paid)
-                                                    <span class="badge bg-success">Paid</span>
-                                                @else
-                                                    <span class="badge bg-warning">Waiting</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if (!$checkout->id_paid)
+                                                {{-- @if (!$checkout->id_paid)
                                                 <form action="{{ route('admin.checkout.update', $checkout->id) }}" method="POST">
                                                     @csrf
                                                     <button class="btn btn-primary btn-sm">Set To Paid</button>
                                                 </form>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                         </tr>
                                     @empty

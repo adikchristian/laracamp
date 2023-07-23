@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\user\checkout\store;
 use App\Mail\Checkout\AfterCheckout;
 use Exception;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Midtrans;
@@ -52,32 +51,24 @@ class CheckoutController extends Controller
      */
     public function store(Store $request, Camp $camp)
     {
-        try {
-            DB::transaction(function() use($request, $camp){
-                $data = $request->all();
-                $data['user_id'] = Auth::id();
-                $data['camp_id'] = $camp->id;
-        
-                $user = Auth::user();
-                $user->email = $data['email'];
-                $user->name = $data['name'];
-                $user->occupation = $data['occupation'];
-                $user->phone = $data['phone'];
-                $user->address = $data['address'];
-                $user->save();
-        
-                $checkout = Checkout::create($data);
-                $urlMidtrans = $this->getSnapRedirect($checkout);
-        
-                Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));
-        
-                return \redirect($urlMidtrans);
-            });
-        } catch (Exception $e) {
-            DB::rollBack();
-            $request->session()->flash('error', "Silahkan Ulangi Transaksi");
-            return \redirect(\route('user.dashboard'));
-        }
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $data['camp_id'] = $camp->id;
+
+        $user = Auth::user();
+        $user->email = $data['email'];
+        $user->name = $data['name'];
+        $user->occupation = $data['occupation'];
+        $user->phone = $data['phone'];
+        $user->address = $data['address'];
+        $user->save();
+
+        $checkout = Checkout::create($data);
+        $urlMidtrans = $this->getSnapRedirect($checkout);
+
+        Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));
+
+        return \redirect($urlMidtrans);
         
         // return \redirect(\route('checkout.success'));
     }

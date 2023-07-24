@@ -78,8 +78,10 @@ class CampController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Camp $camp)
     {
-        //
+        Camp::find($camp->id)->delete();
+
+        return \redirect(\route('admin.camp.index'))->with(['success'=>'Data Berhasil dihapus']);
     }
 }

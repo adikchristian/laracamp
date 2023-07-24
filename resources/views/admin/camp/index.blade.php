@@ -29,12 +29,18 @@
                                         <td>{{ $item->slug }}</td>
                                         <td>${{ $item->price }}k</td>
                                         <td>
-                                            <a href="{{ route('admin.camp.edit', $item->id) }}" class="btn btn-sm btn-warning text-white">
+                                            <a href="{{ route('admin.camp.edit', $item->id) }}"
+                                                class="btn btn-sm btn-warning text-white">
                                                 <i class="fa-solid fa-pencil"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm btn-danger">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </a>
+                                            <form action="{{ route('admin.camp.destroy', $item->id) }}" method="POST"
+                                                style="display: inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm" type="submit"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
+                                                        class="fas fa-trash text-white"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

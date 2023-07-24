@@ -7,7 +7,7 @@
     <meta name="description" content="Dashboard for ShoSo Marketplace" />
     <meta name="author" content="Rachma | @rachmadzii" />
 
-    <title>ShoSo Marketplace - Dashboard</title>
+    <title>laracamp Admin Panel</title>
 
     <link rel="stylesheet" href="{{ asset('/admin/css/styles.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"

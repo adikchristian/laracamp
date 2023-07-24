@@ -11,7 +11,7 @@ class Camp extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'price'];
+    protected $fillable = ['title', 'slug', 'price'];
 
     public function getIsRegisteredAttribute(){
         if(!Auth::check()){

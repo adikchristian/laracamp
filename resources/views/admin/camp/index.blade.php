@@ -4,12 +4,13 @@
     <section class="d-flex flex-column gap-4">
         <div class="d-flex justify-content-between align-items-center gap-3">
             <h4 class="title-section-content">Camp</h4>
-            <a href="#" class="btn btn-sm btn-success">Tambah Data</a>
+            <a href="{{ route('admin.camp.create') }}" class="btn btn-sm btn-success">Tambah Data</a>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
+                        @include('components.alert')
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -37,6 +38,9 @@
                                         </td>
                                     </tr>
                                 @empty
+                                    <tr>
+                                        <td colspan="5" align="center"><b>Tidak Ada Data</b></td>
+                                    </tr>
                                 @endforelse
 
                             </tbody>

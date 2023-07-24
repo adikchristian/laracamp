@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Camp\Store;
 use App\Models\Camp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CampController extends Controller
 {
@@ -23,15 +25,22 @@ class CampController extends Controller
      */
     public function create()
     {
-        //
+        return \view('admin.camp.create',[
+            'linkback' => \route('admin.camp.index'),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title,'-');
+
+        Camp::create($data);
+        
+        return \redirect(\route('admin.camp.index'))->with(['success'=>'Data Berhasil disimpan']);
     }
 
     /**

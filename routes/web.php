@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CampController as AdminCamp;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\CheckoutController;
@@ -55,8 +56,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [UserDashboard::class, 'index'])->name('dashboard');
     });
 
-    Route::prefix('admin/dashboard')->namespace('Admin')->name('admin.')->middleware('ensureUserRole:admin')->group(function(){
-        Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
+    Route::prefix('admin')->name('admin.')->middleware('ensureUserRole:admin')->group(function(){
+        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
+
+        Route::resource('/camp', AdminCamp::class, ['names'=>'camp']);
 
         Route::post('/checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });

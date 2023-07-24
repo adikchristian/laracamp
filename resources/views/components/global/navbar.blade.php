@@ -23,7 +23,7 @@
                     <a class="nav-link" href="#">Business</a>
                 </li>
             </ul>
-            @auth
+            @if(!Auth::user()->is_admin)
             <div class="d-flex user-logged nav-item dropdown no-arrow">
                 <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" arial-expanded="false">
                     Halo, {{ Auth::user()->name }}
@@ -55,7 +55,7 @@
                     Sign Up
                 </a>
             </div>
-            @endauth
+            @endif
             
         </div>
     </div>

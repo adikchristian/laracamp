@@ -28,6 +28,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('prototype-admin', function(){
+    return view('layouts.admin.app');
+});
+
 Route::get('/auth/redirect', [UserController::class, 'google'])->name('auth-redirect');
 Route::get('/auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('auth-callback');
 

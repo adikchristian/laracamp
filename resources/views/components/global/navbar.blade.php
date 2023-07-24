@@ -30,7 +30,7 @@
                     @if (Auth::user()->avatar)
                     <img src="{{ Auth::user()->avatar }}" class="user-photo" alt="" style="border-radius: 50%">
                     @else
-                    <img src="https://ui-avatars.com/api/?name=Admin" class="user-photo" alt="" style="border-radius: 50%">
+                    <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" class="user-photo" alt="" style="border-radius: 50%">
                     @endif
                     
                     <ul class="dropdown-menu" arial-labelleby="dropdownMenuLink" style="right: 0; left: 0;">
@@ -51,7 +51,7 @@
                 <a href="{{ route('login') }}" class="btn btn-master btn-secondary me-3">
                     Sign In
                 </a>
-                <a href="{{ route('login') }}" class="btn btn-master btn-primary">
+                <a href="{{ route('register.view') }}" class="btn btn-master btn-primary">
                     Sign Up
                 </a>
             </div>

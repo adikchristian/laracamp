@@ -29,7 +29,7 @@
                                         <td>{{ $item->slug }}</td>
                                         <td>${{ $item->price }}k</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-warning">
+                                            <a href="{{ route('admin.camp.edit', $item->id) }}" class="btn btn-sm btn-warning text-white">
                                                 <i class="fa-solid fa-pencil"></i>
                                             </a>
                                             <a href="#" class="btn btn-sm btn-danger">

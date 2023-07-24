@@ -54,17 +54,25 @@ class CampController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Camp $camp)
     {
-        //
+        return \view('admin.camp.update',[
+            'linkback' => \route('admin.camp.index'),
+            'camp' => $camp,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Store $request, string $id)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title,'-');
+
+        Camp::find($id)->update($data);
+
+        return \redirect(\route('admin.camp.index'))->with(['success'=>'Data Berhasil disimpan']);
     }
 
     /**

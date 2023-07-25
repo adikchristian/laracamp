@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CampBenefitController;
 use App\Http\Controllers\Admin\CampController as AdminCamp;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -60,6 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
 
         Route::resource('/camp', AdminCamp::class, ['names'=>'camp']);
+        Route::resource('/camp-benefit', CampBenefitController::class, ['names'=>'camp-benefit']);
 
         Route::post('/checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });

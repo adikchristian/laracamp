@@ -33,6 +33,9 @@
                                                 class="btn btn-sm btn-warning text-white">
                                                 <i class="fa-solid fa-pencil"></i>
                                             </a>
+                                            <a href="{{ route('admin.camp-benefit.index').'?q='.$item->id }}" class="btn btn-success btn-sm">
+                                                <i class="fa-solid fa-hands-holding-circle"></i>
+                                            </a>
                                             <form action="{{ route('admin.camp.destroy', $item->id) }}" method="POST"
                                                 style="display: inline-block">
                                                 @csrf

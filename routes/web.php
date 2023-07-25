@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CheckoutController as AdminCheckout;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/camp', AdminCamp::class, ['names'=>'camp']);
         Route::resource('/camp-benefit', CampBenefitController::class, ['names'=>'camp-benefit']);
+        Route::get('/users', [AdminUserController::class, 'index'])->name('user');
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('user.destroy');
 
         Route::post('/checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });

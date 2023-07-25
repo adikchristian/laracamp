@@ -54,24 +54,35 @@ class CampBenefitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CampBenefit $campBenefit, Request $request)
     {
-        //
+        $camp = Camp::with('Benefit')->find($campBenefit->camp_id);
+        return \view('admin.camp-benefit.update', [
+            'camp' => $camp,
+            'linkback' => \route('admin.camp-benefit.index'),
+            'item' => $campBenefit,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Store $request, string $id)
     {
-        //
+        $data = $request->all();
+        // return $data;
+        $data['camp_id'] = $request->query('q');
+
+        CampBenefit::find($id)->update($data);
+        return \redirect(\route('admin.camp-benefit.index').'?q='.$request->query('q'))->with('success','Data Berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CampBenefit $campBenefit, Request $request)
     {
-        //
+        $campBenefit->delete();
+        return \redirect(\route('admin.camp-benefit.index').'?q='.$request->query('q'))->with('success','Data Berhasil dihapus');
     }
 }

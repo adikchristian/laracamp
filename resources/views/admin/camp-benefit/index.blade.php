@@ -7,26 +7,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                @include('components.alert')
-                <div class="card mt-2">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <tbody>
-                                <tr>
-                                    <td colspan="2">Camp</td>
-                                </tr>
-                                <tr>
-                                    <td>Title</td>
-                                    <td>{{ $camp->title }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Price</td>
-                                    <td>${{ $camp->price }}k</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                @include('admin.camp-benefit.camp')
             </div>
         </div>
         <div class="row">
@@ -39,7 +20,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Nama</label>
                                 <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                    placeholder="Nama">
+                                    placeholder="Nama" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
                                 @endif

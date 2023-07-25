@@ -12,10 +12,10 @@
                     <td>{{ $num + 1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>
-                        <a href="{{ route('admin.camp.edit', $item->id) }}" class="btn btn-sm btn-warning text-white">
+                        <a href="{{ route('admin.camp-benefit.edit', $item->id).'?q='.$camp->id }}" class="btn btn-sm btn-warning text-white">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
-                        <form action="{{ route('admin.camp.destroy', $item->id) }}" method="POST"
+                        <form action="{{ route('admin.camp-benefit.destroy', $item->id).'?q='.$camp->id }}" method="POST"
                             style="display: inline-block">
                             @csrf
                             @method('DELETE')

@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/camp-benefit', CampBenefitController::class, ['names'=>'camp-benefit']);
         Route::get('/users', [AdminUserController::class, 'index'])->name('user');
         Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('user.destroy');
+        Route::get('report/checkout', [AdminCheckout::class, 'index'])->name('report.checkout');
+        Route::post('report/checkout', [AdminCheckout::class, 'filterCheckout'])->name('report.checkout.filter');
 
         Route::post('/checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });

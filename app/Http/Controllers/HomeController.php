@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContentBenefit;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -16,5 +17,12 @@ class HomeController extends Controller
                 return \redirect(\route('user.dashboard'));
                 break;
         }
+    }
+
+    public function index(){
+        $contentBenefit = ContentBenefit::orderBy('id','DESC')->limit(4)->get();
+        return view('welcome', [
+            'contentBenefits' => $contentBenefit
+        ]);
     }
 }

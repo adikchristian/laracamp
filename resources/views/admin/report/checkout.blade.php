@@ -70,6 +70,7 @@
                                 <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10">
                                     <button type="submit" name="submit" class="btn btn-sm btn-success">Tampilkan</button>
+                                    <a href="{{ route('admin.report.checkout.export-pdf').'?start='.$startDate.'&end='.$endDate.'&status='.$status }}" class="btn btn-sm btn-primary">Export PDF</a>
                                 </div>
                             </div>
                         </form>

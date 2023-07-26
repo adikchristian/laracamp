@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('user.destroy');
         Route::get('report/checkout', [AdminCheckout::class, 'index'])->name('report.checkout');
         Route::post('report/checkout', [AdminCheckout::class, 'filterCheckout'])->name('report.checkout.filter');
+        Route::get('report/checkout/export-pdf', [AdminCheckout::class, 'pdfCheckout'])->name('report.checkout.export-pdf');
 
         Route::post('/checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });

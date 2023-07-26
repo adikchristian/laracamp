@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\Checkout\Paid;
 use App\Models\Checkout;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,6 +40,29 @@ class CheckoutController extends Controller
             'endDate' => $end,
             "status" => $status,
         ]);
+    }
+
+    public function pdfCheckout(Request $request){
+        $start = $request->query('start');
+        $end = $request->query('end');
+        $status = $request->query('status');
+        $checkout = Checkout::with(['Camp', 'User'])->whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end);
+        if($status!=""){
+            $checkout->where(['payment_status'=>$status]);
+        }
+
+        $pdf = PDF::loadView('admin.pdf.checkout',[
+            'checkouts' => $checkout->get(),
+            'startDate' => $start,
+            'endDate' => $end,
+            "status" => $status,
+        ]);
+        if($status==""){
+            $statusVal = "Semua Status Pembayaran";
+        }else{
+            $statusVal = "Status ".$status;
+        }
+        return $pdf->download('report-checkouts-periode-'.$start.'SD'.$end.'-'.$statusVal.'.pdf');
     }
 
     public function update(Request $request, Checkout $checkout){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContentBenefit;
+use App\Models\ContentStep;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -21,8 +22,10 @@ class HomeController extends Controller
 
     public function index(){
         $contentBenefit = ContentBenefit::orderBy('id','DESC')->limit(4)->get();
+        $contentStep = ContentStep::all();
         return view('welcome', [
-            'contentBenefits' => $contentBenefit
+            'contentBenefits' => $contentBenefit,
+            'contentSteps' => $contentStep
         ]);
     }
 }

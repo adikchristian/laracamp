@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\ContentBenefit;
+use App\Models\ContentStep;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +19,8 @@ class DatabaseSeeder extends Seeder
             CampTableSeeder::class,
             CampBenefitTableSeeder::class,
             AdminUserSeeder::class,
+            ContentBenefit::class,
+            ContentStep::class,
         ]);
     }
 }

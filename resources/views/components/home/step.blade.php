@@ -1,27 +1,59 @@
 <section class="steps">
     <div class="container">
-        <div class="row item-step pb-70">
-            <div class="col-lg-6 col-12 text-center">
-                <img src="{{ asset('/images/step1.png') }}" class="cover" alt="">
-            </div>
-            <div class="col-lg-6 col-12 text-left copywriting">
-                <p class="story">
-                    BETTER CAREER
-                </p>
-                <h2 class="primary-header">
-                    Prepare The Journey
-                </h2>
-                <p class="support">
-                    Learn from anyone around the <br> world and get a new skills
-                </p>
-                <p class="mt-5">
-                    <a href="#" class="btn btn-master btn-secondary me-3">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="row item-step pb-70">
+        @foreach ($contentSteps as $num => $item)
+            @php
+                $num = $num + 1;
+                $mod = $num % 2;
+            @endphp
+            @if ($mod == 0)
+                <div class="row item-step pb-70">
+                    <div class="col-lg-6 col-12 text-left copywriting pl-150">
+                        <p class="story">
+                            {{ $item->subtitle }}
+                        </p>
+                        <h2 class="primary-header">
+                            {{ $item->title }}
+                        </h2>
+                        <p class="support">
+                            {{ $item->description }}
+                        </p>
+                        <p class="mt-5">
+                            <a href="{{ $item->link }}" class="btn btn-master btn-secondary me-3">
+                                {{ $item->btnvalue }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-12 text-center">
+                        <img src="{{ asset($item->image) }}" class="cover" alt="">
+                    </div>
+
+                </div>
+            @else
+                <div class="row item-step pb-70">
+                    <div class="col-lg-6 col-12 text-center">
+                        <img src="{{ asset($item->image) }}" class="cover" alt="">
+                    </div>
+                    <div class="col-lg-6 col-12 text-left copywriting">
+                        <p class="story">
+                            {{ $item->subtitle }}
+                        </p>
+                        <h2 class="primary-header">
+                            {{ $item->title }}
+                        </h2>
+                        <p class="support">
+                            {{ $item->description }}
+                        </p>
+                        <p class="mt-5">
+                            <a href="{{ $item->link }}" class="btn btn-master btn-secondary me-3">
+                                {{ $item->btnvalue }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+
+        {{-- <div class="row item-step pb-70">
             <div class="col-lg-6 col-12 text-left copywriting pl-150">
                 <p class="story">
                     STUDY HARDER
@@ -65,6 +97,6 @@
                     </a>
                 </p>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>

@@ -73,8 +73,7 @@ class ContentBenefitController extends Controller
         $data = $request->all();
 
         if($request->icon){
-            // \unlink(\public_path($contentBenefit->icon));
-            Storage::disk('public')->delete($contentBenefit->icon);
+            $this->removeImage($contentBenefit->icon);
             $data['icon'] = $request->file('icon')->store('assets/icon','public');
         }else{
             $data['icon'] = $contentBenefit->icon;
@@ -88,8 +87,15 @@ class ContentBenefitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ContentBenefit $contentBenefit)
     {
-        //
+        $contentBenefit->delete();
+        $this->removeImage($contentBenefit->icon);
+
+        return \redirect(\route('admin.content-benefit.index'))->with('success','Data Berhasil dihapus');
+    }
+
+    public function removeImage($patch){
+        return Storage::disk('public')->delete($patch);
     }
 }

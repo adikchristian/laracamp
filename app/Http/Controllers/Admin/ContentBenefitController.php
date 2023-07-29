@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ContentBenefit\Store;
+use App\Http\Requests\Admin\ContentBenefit\Update;
 use App\Models\ContentBenefit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContentBenefitController extends Controller
 {
@@ -54,17 +56,33 @@ class ContentBenefitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ContentBenefit $contentBenefit)
     {
-        //
+        return \view('admin.content-benefit.update',[
+            'linkback' => \route('admin.content-benefit.index'),
+            'item' => $contentBenefit,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Update $request, ContentBenefit $contentBenefit)
     {
-        //
+
+        $data = $request->all();
+
+        if($request->icon){
+            // \unlink(\public_path($contentBenefit->icon));
+            Storage::disk('public')->delete($contentBenefit->icon);
+            $data['icon'] = $request->file('icon')->store('assets/icon','public');
+        }else{
+            $data['icon'] = $contentBenefit->icon;
+        }
+
+        ContentBenefit::find($contentBenefit->id)->update($data);
+
+        return \redirect(\route('admin.content-benefit.index'))->with('success','Data Berhasil disimpan');
     }
 
     /**

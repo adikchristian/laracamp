@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="lead">Total Transaksi</div>
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="lead">Total User</div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="lead">Total Camp</div>

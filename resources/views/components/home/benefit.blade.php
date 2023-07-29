@@ -14,7 +14,7 @@
             @foreach ($contentBenefits as $item)
                 <div class="col-lg-3 col-12">
                     <div class="item-benefit">
-                        <img src="{{ asset($item->icon) }}" class="icon" alt="">
+                        <img src="{{ asset('storage') . '/' .$item->icon }}" class="icon" alt="">
                         <h3 class="title">
                             {{ $item->title }}
                         </h3>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ContentBenefit\Store;
 use App\Models\ContentBenefit;
 use Illuminate\Http\Request;
 
@@ -23,15 +24,23 @@ class ContentBenefitController extends Controller
      */
     public function create()
     {
-        //
+        return \view('admin.content-benefit.create',[
+            'linkback' => \route('admin.content-benefit.index'),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        $data = $request->all();
+
+        $data['icon'] = $request->file('icon')->store('assets/icon','public');
+
+        ContentBenefit::create($data);
+
+        return \redirect(\route('admin.content-benefit.index'))->with('success','Data Berhasil disimpan');
     }
 
     /**

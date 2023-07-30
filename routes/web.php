@@ -11,6 +11,7 @@ use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\CheckoutController as AdminCheckout;
 use App\Http\Controllers\Admin\ContentBenefitController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
@@ -70,6 +71,8 @@ Route::middleware('auth')->group(function () {
         Route::get('report/checkout', [AdminCheckout::class, 'index'])->name('report.checkout');
         Route::post('report/checkout', [AdminCheckout::class, 'filterCheckout'])->name('report.checkout.filter');
         Route::get('report/checkout/export-pdf', [AdminCheckout::class, 'pdfCheckout'])->name('report.checkout.export-pdf');
+
+        Route::resource('discount', DiscountController::class, ['names'=>'discount']);
 
         Route::post('/checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });
